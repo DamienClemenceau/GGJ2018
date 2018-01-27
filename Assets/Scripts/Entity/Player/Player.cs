@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public float maxStamina;
     public float staminaUseByBlop;
     public LayerMask groundLayer;
+    public GameObject miniBlopMarker;
 
     [HideInInspector]
     public float stamina;
