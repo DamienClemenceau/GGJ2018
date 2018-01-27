@@ -1,46 +1,93 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
-	/**
+    /**
 	* Attributes
 	*/
-	[HideInInspector]
-	public static Player instance = null;
+    [HideInInspector]
+    public static Player instance = null;
 
-	private Vector2 velocity;
-  private Vector2 directionnalInput;
-  private float velocitySmoothing;
-  //private float gravity = -5;
+    public float speed;
+    public float jumpForce;
+    public LayerMask groundLayer;
 
-  public float speed;
+    private Rigidbody2D _rigidbody;
+    private SpriteRenderer spriteRenderer;
 
-	/**
+    private Vector2 velocity;
+    private Vector2 directionnalInput;
+    private float velocitySmoothing;
+
+    private bool wasGrounded = false;
+    private bool isJumping = false;
+    private bool canJump = true;
+    private float lastJumpTime, lastGroundedTime;
+
+    private bool facingRight;
+    /**
 	* Accessors
 	*/
 
 
-	/**
+    /**
 	* Monobehavior methods
 	*/
-	private void Awake()
-	{
-		if (instance != null)
-			Destroy(this);
-		else
-			instance = this;
-	}
+    private void Awake()
+    {
+        if (instance != null)
+            Destroy(this);
+        else
+            instance = this;
+    }
 
-	void Start () {
-	}
-	
-	void Update () {
-    float targetVelocityX = Input.GetAxisRaw("Horizontal") * speed;
-    velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocitySmoothing, 0.01f);
-    //   velocity.y += gravity * Time.deltaTime;
+    void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-    transform.position += (Vector3)(velocity * Time.deltaTime);
-  }
+    void FixedUpdate()
+    {
+        float targetVelocityX = Input.GetAxisRaw("Horizontal") * speed;
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocitySmoothing, 0.01f);
+
+        transform.Translate(velocity * Time.deltaTime);
+
+        Flip();
+
+        if (IsGrounded())
+        {
+            isJumping = false;
+            wasGrounded = true;
+            lastGroundedTime = Time.time;
+        }
+        if (Input.GetButtonDown("Jump") && wasGrounded && !isJumping && canJump)
+        {
+            print("Pass");
+            isJumping = true;
+            lastJumpTime = Time.time;
+
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+            _rigidbody.AddForce(Vector2.up * jumpForce);
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.Raycast(transform.position, Vector3.down, 0.15f, groundLayer);
+    }
+
+    private void Flip()
+    {
+        if ((facingRight && velocity.x > 0) || (!facingRight && velocity.x < 0))
+        {
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+            facingRight = !facingRight;
+        }
+    }
 }
