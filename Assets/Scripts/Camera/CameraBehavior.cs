@@ -44,6 +44,9 @@ public class CameraBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
+        if (player == null)
+            return;
+
 		Vector3 pos = MoveAxis.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, MoveAxis.transform.position.z);
 
 		if (MoveAxis.transform.position.y < .01f)

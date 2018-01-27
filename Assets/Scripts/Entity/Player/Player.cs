@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public float maxStamina;
     public float staminaUseByBlop;
     public LayerMask groundLayer;
-    public GameObject miniBlopMarker;
+    public GameObject miniBlopMarker, deathObject;
 
     [HideInInspector]
     public float stamina;
@@ -143,9 +143,12 @@ public class Player : MonoBehaviour
         Bounds bounds = _collider.bounds;
 
         Vector2 bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
+        Vector2 bottomRight = new Vector2(bounds.max.x, bounds.min.y);
 
-        Debug.DrawRay(bottomLeft, Vector3.down * 0.15f, Color.green);
-        return Physics2D.Raycast(bottomLeft, Vector3.down, 0.15f, groundLayer);
+        bool groundedLeft = Physics2D.Raycast(bottomLeft, Vector3.down, 0.15f, groundLayer);
+        bool groundedRight = Physics2D.Raycast(bottomRight, Vector3.down, 0.15f, groundLayer);
+        
+        return groundedLeft || groundedRight;
     }
 
     private void Flip()
@@ -161,5 +164,11 @@ public class Player : MonoBehaviour
     {
         isStaminaInfinite = true;
         lastTimeStartInfiniteStamina = Time.time;
+    }
+
+    public void Death()
+    {
+        Instantiate(deathObject, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1816274093758926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -49.03, y: 46.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8315715, y: 0.8315711, z: 0.8315711}
   m_Children:
   - {fileID: 4975902283772742}
@@ -185,6 +185,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   miniBlopMarker: {fileID: 1500006980986090}
+  deathObject: {fileID: 1613838021865294, guid: 4f95fb5133c20be45a8bb86fb14f1448,
+    type: 2}
   stamina: 0
 --- !u!212 &212343205580917300
 SpriteRenderer:
