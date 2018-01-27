@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
 
     public float speed, runSpeed;
     public float jumpForce;
+    public float maxStamina;
+    public float staminaUseByBlop;
     public LayerMask groundLayer;
 
     private Rigidbody2D _rigidbody;
@@ -25,11 +27,13 @@ public class Player : MonoBehaviour
 
     private bool wasGrounded = false;
     private bool isJumping = false;
-    private bool canJump = true;
     private float lastJumpTime, lastGroundedTime;
 
     private bool facingRight;
     private bool isRunning;
+    private float stamina;
+    private float lastBlopTime;
+    private float lastStaminaIncrement;
 
     /**
     * Accessors
@@ -51,9 +55,11 @@ public class Player : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        stamina = maxStamina;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         float targetVelocityX = Input.GetAxisRaw("Horizontal") * speed;
 
@@ -70,11 +76,18 @@ public class Player : MonoBehaviour
 
         if (IsGrounded())
         {
+            bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
+            if (stamina < maxStamina && canRegenStamina)
+            {
+                lastStaminaIncrement = Time.time;
+                stamina++;
+            }
+
             isJumping = false;
             wasGrounded = true;
             lastGroundedTime = Time.time;
 
-            if(Input.GetButtonDown("Run"))
+            if(Input.GetButton("Run"))
             {
                 isRunning = true;
             } else
@@ -82,6 +95,14 @@ public class Player : MonoBehaviour
                 isRunning = false;
             }
         }
+        else if (Time.time - lastGroundedTime > 0.25f)
+        {
+            wasGrounded = false;
+            isJumping = false;
+        }
+
+        bool canJump = Time.time - lastJumpTime > 0.25f;
+        bool canBlob = Time.time - lastBlopTime > 0.6f;
 
         if (Input.GetButtonDown("Jump") && wasGrounded && !isJumping && canJump)
         {
@@ -90,6 +111,13 @@ public class Player : MonoBehaviour
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
             _rigidbody.AddForce(Vector2.up * jumpForce);
+        }
+        else if (Input.GetButtonDown("Jump") && !wasGrounded && stamina >= staminaUseByBlop && canBlob)
+        {
+            lastBlopTime = Time.time;
+            stamina -= staminaUseByBlop;
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+            _rigidbody.AddForce(Vector2.up * jumpForce / 2);
         }
     }
 

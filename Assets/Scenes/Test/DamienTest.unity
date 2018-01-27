@@ -1609,11 +1609,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4157772404385954, guid: a88a1479086bb764a851913a20105f0f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.93
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 4157772404385954, guid: a88a1479086bb764a851913a20105f0f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 4157772404385954, guid: a88a1479086bb764a851913a20105f0f, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1979,7 +1979,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280487876378698, guid: 8a99d34bf12c3fd4a995efc067a2192d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.23
+      value: -4.38
       objectReference: {fileID: 0}
     - target: {fileID: 4280487876378698, guid: 8a99d34bf12c3fd4a995efc067a2192d, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2486,6 +2486,16 @@ Prefab:
     - target: {fileID: 4853547697924976, guid: 3db0342859ec6f34c9b6b899e1613f12, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114939956328757076, guid: 3db0342859ec6f34c9b6b899e1613f12,
+        type: 2}
+      propertyPath: maxStamina
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114939956328757076, guid: 3db0342859ec6f34c9b6b899e1613f12,
+        type: 2}
+      propertyPath: staminaUseByBlop
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3db0342859ec6f34c9b6b899e1613f12, type: 2}
