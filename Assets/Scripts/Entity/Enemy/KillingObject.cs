@@ -8,7 +8,7 @@ public class KillingObject : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<Player>().Death();
         }
     }
 }

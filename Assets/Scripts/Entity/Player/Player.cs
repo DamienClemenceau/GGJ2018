@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public float maxStamina;
     public float staminaUseByBlop;
     public LayerMask groundLayer;
-    public GameObject miniBlopMarker;
+    public GameObject miniBlopMarker, deathObject;
 
     [HideInInspector]
     public float stamina;
@@ -164,5 +164,11 @@ public class Player : MonoBehaviour
     {
         isStaminaInfinite = true;
         lastTimeStartInfiniteStamina = Time.time;
+    }
+
+    public void Death()
+    {
+        Instantiate(deathObject, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
