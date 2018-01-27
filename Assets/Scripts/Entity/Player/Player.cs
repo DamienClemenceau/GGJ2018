@@ -65,11 +65,11 @@ public class Player : MonoBehaviour
         stamina = maxStamina;
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         float targetVelocityX = Input.GetAxisRaw("Horizontal") * speed;
 
-        if(isRunning)
+        if (isRunning)
         {
             targetVelocityX *= runSpeed;
         }
@@ -77,7 +77,10 @@ public class Player : MonoBehaviour
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocitySmoothing, 0.01f);
 
         transform.Translate(velocity * Time.deltaTime);
+    }
 
+    void Update()
+    {
         Flip();
 
         if (IsGrounded())
@@ -116,7 +119,7 @@ public class Player : MonoBehaviour
             lastJumpTime = Time.time;
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-            _rigidbody.AddForce(Vector2.up * jumpForce);
+            _rigidbody.velocity += Vector2.up * jumpForce;
         }
         else if (Input.GetButtonDown("Jump") && !wasGrounded && (stamina >= staminaUseByBlop || isStaminaInfinite) && canBlob)
         {
@@ -124,7 +127,7 @@ public class Player : MonoBehaviour
             if(!isStaminaInfinite)
                 stamina -= staminaUseByBlop;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-            _rigidbody.AddForce(Vector2.up * jumpForce / 2);
+            _rigidbody.velocity += Vector2.up * (jumpForce * 0.6f);
         }
 
         if(Time.time - lastTimeStartInfiniteStamina > 10.0f)
