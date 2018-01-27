@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     public float staminaUseByBlop;
     public LayerMask groundLayer;
 
+    [HideInInspector]
+    public float stamina;
+
     private Rigidbody2D _rigidbody;
     private SpriteRenderer spriteRenderer;
 
@@ -31,7 +34,6 @@ public class Player : MonoBehaviour
 
     private bool facingRight;
     private bool isRunning;
-    private float stamina;
     private float lastBlopTime;
     private float lastStaminaIncrement;
 
