@@ -4,6 +4,7 @@ using UnityEngine;
 public class MovingEnemy : KillingObject {
     public Vector3[] localWaypoints;
     public float speed;
+    public bool loop;
 
     private Vector3[] globalWaypoints;
     private int fromWaypointIndex;
@@ -37,10 +38,12 @@ public class MovingEnemy : KillingObject {
             percentBetween = 0;
             fromWaypointIndex++;
 
-            if(fromWaypointIndex >= globalWaypoints.Length -1)
-            {
-                fromWaypointIndex = 0;
-                Array.Reverse(globalWaypoints);
+            if(!loop) { 
+                if(fromWaypointIndex >= globalWaypoints.Length -1)
+                {
+                    fromWaypointIndex = 0;
+                    Array.Reverse(globalWaypoints);
+                }
             }
         }
 
