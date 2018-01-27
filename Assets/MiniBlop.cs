@@ -4,9 +4,25 @@ using UnityEngine;
 
 public class MiniBlop : MonoBehaviour {
     public GameObject follow;
+    public string color;
 
-	void Start () {
-       		
+	void Awake () {
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        switch(color)
+        {
+            case "Yellow":
+                renderer.sprite = Resources.Load("Sprites/mini_blop_jaune", typeof(Sprite)) as Sprite;
+                break;
+            case "Green":
+                renderer.sprite = Resources.Load("Sprites/mini_blop_vert", typeof(Sprite)) as Sprite;
+                break;
+            case "Purple":
+                renderer.sprite = Resources.Load("Sprites/mini_blop_violet", typeof(Sprite)) as Sprite;
+                break;
+            default:
+                renderer.sprite = Resources.Load("Sprites/mini_blop_bleu", typeof(Sprite)) as Sprite;
+                break;
+        }
 	}
 	
 	void Update () {
