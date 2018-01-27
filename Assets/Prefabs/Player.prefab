@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4853547697924976}
   - component: {fileID: 212835697300130124}
+  - component: {fileID: 61145728194723376}
   - component: {fileID: 114939956328757076}
   - component: {fileID: 50212561739351992}
-  - component: {fileID: 61145728194723376}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -109,7 +109,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -125,7 +124,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
