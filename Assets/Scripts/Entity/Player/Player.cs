@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public static Player instance = null;
 
-    public float speed;
+    public float speed, runSpeed;
     public float jumpForce;
     public LayerMask groundLayer;
 
@@ -29,9 +29,11 @@ public class Player : MonoBehaviour
     private float lastJumpTime, lastGroundedTime;
 
     private bool facingRight;
+    private bool isRunning;
+
     /**
-	* Accessors
-	*/
+    * Accessors
+    */
 
 
     /**
@@ -54,6 +56,12 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         float targetVelocityX = Input.GetAxisRaw("Horizontal") * speed;
+
+        if(isRunning)
+        {
+            targetVelocityX *= runSpeed;
+        }
+
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocitySmoothing, 0.01f);
 
         transform.Translate(velocity * Time.deltaTime);
@@ -65,10 +73,18 @@ public class Player : MonoBehaviour
             isJumping = false;
             wasGrounded = true;
             lastGroundedTime = Time.time;
+
+            if(Input.GetButtonDown("Run"))
+            {
+                isRunning = true;
+            } else
+            {
+                isRunning = false;
+            }
         }
+
         if (Input.GetButtonDown("Jump") && wasGrounded && !isJumping && canJump)
         {
-            print("Pass");
             isJumping = true;
             lastJumpTime = Time.time;
 
