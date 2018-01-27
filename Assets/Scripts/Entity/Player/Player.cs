@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     private bool isRunning;
     private float lastBlopTime;
     private float lastStaminaIncrement;
+    private bool isStaminaInfinite;
+
+    public float lastTimeStartInfiniteStamina { get; private set; }
 
     /**
     * Accessors
@@ -114,12 +117,18 @@ public class Player : MonoBehaviour
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
             _rigidbody.AddForce(Vector2.up * jumpForce);
         }
-        else if (Input.GetButtonDown("Jump") && !wasGrounded && stamina >= staminaUseByBlop && canBlob)
+        else if (Input.GetButtonDown("Jump") && !wasGrounded && (stamina >= staminaUseByBlop || isStaminaInfinite) && canBlob)
         {
             lastBlopTime = Time.time;
-            stamina -= staminaUseByBlop;
+            if(!isStaminaInfinite)
+                stamina -= staminaUseByBlop;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
             _rigidbody.AddForce(Vector2.up * jumpForce / 2);
+        }
+
+        if(Time.time - lastTimeStartInfiniteStamina > 10.0f)
+        {
+            isStaminaInfinite = false;
         }
     }
 
@@ -135,5 +144,11 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX = !spriteRenderer.flipX;
             facingRight = !facingRight;
         }
+    }
+
+    public void TemporaryInfiniteStamina()
+    {
+        isStaminaInfinite = true;
+        lastTimeStartInfiniteStamina = Time.time;
     }
 }
