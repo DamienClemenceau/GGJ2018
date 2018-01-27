@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public float stamina;
 
     private Rigidbody2D _rigidbody;
+    private BoxCollider2D _collider;
     private SpriteRenderer spriteRenderer;
 
     private Vector2 velocity;
@@ -60,6 +61,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         stamina = maxStamina;
@@ -82,7 +84,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Flip();
-
+        print(IsGrounded());
         if (IsGrounded())
         {
             bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
@@ -138,7 +140,12 @@ public class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector3.down, 0.15f, groundLayer);
+        Bounds bounds = _collider.bounds;
+
+        Vector2 bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
+
+        Debug.DrawRay(bottomLeft, Vector3.down * 0.15f, Color.green);
+        return Physics2D.Raycast(bottomLeft, Vector3.down, 0.15f, groundLayer);
     }
 
     private void Flip()
