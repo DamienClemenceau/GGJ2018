@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7d181cfdefa3b46b362b48c223dd84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveAxis: {fileID: 0}
-  ShakeAxis: {fileID: 0}
+  MoveAxis: {fileID: 4845633607265440}
+  ShakeAxis: {fileID: 4142749705399844}
   landscape: {fileID: 0}
 --- !u!124 &124190459954943286
 Behaviour:

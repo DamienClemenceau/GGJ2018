@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingEnnemy : MonoBehaviour {
+public class ShootingEnemy : MonoBehaviour {
     public GameObject projectile, shootSpawn;
     public float fireRate;
 

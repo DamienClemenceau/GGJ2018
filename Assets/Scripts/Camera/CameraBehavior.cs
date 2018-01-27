@@ -48,8 +48,6 @@ public class CameraBehavior : MonoBehaviour {
 
 		if (MoveAxis.transform.position.y < .01f)
 			pos.y = 0;
-		else if (MoveAxis.transform.position.y > 8.8f)
-			pos.y = 9f;
 
 		MoveAxis.transform.position = pos;
 

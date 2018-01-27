@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class MovingEnnemy : KillingObject {
+public class MovingEnemy : KillingObject {
     public Vector3[] localWaypoints;
     public float speed;
 
