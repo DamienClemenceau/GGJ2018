@@ -114,6 +114,11 @@ public class Player : MonoBehaviour
             return;
         }
 
+        if(Input.GetButton("Interact"))
+        {
+            Interact();
+        }
+
 		if (IsGrounded())
 		{
 			bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
@@ -181,8 +186,8 @@ public class Player : MonoBehaviour
 	}
   }
         private void Interact()
-    {
-        if(triggerObject != null)
+        {
+        if (triggerObject != null)
         {
             JamInteraction jam = triggerObject.GetComponent<JamInteraction>();
             if(jam != null)
