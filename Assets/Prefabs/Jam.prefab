@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4211568942929460}
   - component: {fileID: 212251729334443620}
+  - component: {fileID: 95669362550312172}
   m_Layer: 0
   m_Name: jam_couvercle
   m_TagString: Untagged
@@ -126,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567465269435662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.81, y: 28.41, z: -0.062162}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.326097, y: 1.3260968, z: 1.3260968}
   m_Children:
   - {fileID: 4211568942929460}
@@ -239,6 +240,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2526035, y: 15.756565}
   m_EdgeRadius: 0
+--- !u!95 &95669362550312172
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762680181078734}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49c5d3f6d7a49514894c8352ff4f6c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212251729334443620
 SpriteRenderer:
   m_ObjectHideFlags: 1
