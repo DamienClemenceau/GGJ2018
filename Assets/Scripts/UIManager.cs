@@ -16,13 +16,16 @@ public class UIManager : MonoBehaviour {
         curCollect.text = player.blopCollected.ToString();
         maxCollect.text = FindObjectsOfType<MiniBlop>().Length.ToString();
 
-      //  deathCounter.text = GameManager.instance.deathCount.ToString();
+        if(GameManager.instance != null)
+            deathCounter.text = GameManager.instance.deathCount.ToString();
     }
 
     private void LateUpdate()
     {
         curStamina.text = player.stamina.ToString();
         curCollect.text = player.blopCollected.ToString();
-       // deathCounter.text = GameManager.instance.deathCount.ToString();
+
+        if (GameManager.instance != null)
+         deathCounter.text = GameManager.instance.deathCount.ToString();
     }
 }
