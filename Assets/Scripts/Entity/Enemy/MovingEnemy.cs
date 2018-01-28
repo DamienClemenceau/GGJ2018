@@ -14,7 +14,7 @@ public class MovingEnemy : KillingObject {
     void Awake()
     {
         SpriteRenderer renderer = GetComponentInChildren<SpriteRenderer>();
-        renderer.sprite = Resources.Load("Sprites/starfish_" + color) as Sprite;
+        renderer.sprite = Resources.Load("Sprites/starfish_" + color, typeof(Sprite)) as Sprite;
     }
 
     void Start () {
