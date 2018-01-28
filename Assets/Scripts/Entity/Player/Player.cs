@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     private float lastBlopTime;
     private float lastStaminaIncrement;
     private bool isStaminaInfinite;
+    private GameObject triggerObject;
 
     public float lastTimeStartInfiniteStamina { get; private set; }
 
@@ -100,6 +101,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetButton("Interact"))
+        {
+            Interact();
+        }
+
         if (IsGrounded())
         {
             bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
@@ -155,6 +161,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Interact()
+    {
+        if(triggerObject != null)
+        {
+            JamInteraction jam = triggerObject.GetComponent<JamInteraction>();
+            if(jam != null)
+            {
+                jam.BeginInteraction();
+            }
+        }
+    }
+
     private bool IsGrounded()
     {
         Bounds bounds = _collider.bounds;
@@ -180,5 +198,21 @@ public class Player : MonoBehaviour
             GameManager.instance.deathCount++;
         Instantiate(deathObject, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Trigger")
+        {
+            triggerObject = other.gameObject;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject == triggerObject)
+        {
+            triggerObject = null;
+        }
     }
 }
