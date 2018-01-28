@@ -1244,6 +1244,7 @@ MonoBehaviour:
   curCollect: {fileID: 114160469247818542}
   maxCollect: {fileID: 114492286952629522}
   pause: {fileID: 1140596785035570}
+  message: {fileID: 1575117286778456}
 --- !u!114 &114795172012734624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1574,6 +1575,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1896457533119966}
+--- !u!222 &222941823119553348
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1575117286778456}
 --- !u!223 &223522302656088734
 Canvas:
   m_ObjectHideFlags: 1
@@ -1592,7 +1599,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &224008287224499356
 RectTransform:
@@ -1628,6 +1635,7 @@ RectTransform:
   - {fileID: 224176844977942274}
   - {fileID: 224008287224499356}
   - {fileID: 224430818068451016}
+  - {fileID: 224272089731530742}
   m_Father: {fileID: 4020628246288276}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

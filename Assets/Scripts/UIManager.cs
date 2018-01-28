@@ -9,11 +9,15 @@ public class UIManager : MonoBehaviour {
     public Text curStamina, maxStamina;
     public Text deathCounter;
     public Text curCollect, maxCollect;
-    public GameObject pause;
+    public GameObject pause, message;
 
     private bool isPaused;
+    private bool drawMessage = true;
+    private float startTime;
 
     void Start () {
+        startTime = Time.time;
+
         curStamina.text = player.stamina.ToString();
         maxStamina.text = player.maxStamina.ToString();
         
@@ -35,21 +39,22 @@ public class UIManager : MonoBehaviour {
 
         if (isPaused)
         {
-            pause.SetActive(true);
-
 						if (Input.GetButtonDown("Back"))
 						{
 								BackToMenu();
 						}
 				}
-        else
-        {
-            pause.SetActive(false);
-        }
+        pause.SetActive(isPaused);
+        message.SetActive(drawMessage);
     }
 
     private void Update()
     {
+        if(Time.time - startTime > 3f)
+        {
+            drawMessage = false;
+        }
+
         if (Input.GetButtonDown("Pause"))
         {
             isPaused = !isPaused;
