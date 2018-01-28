@@ -125,6 +125,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  stamina: 0
 --- !u!212 &212835697300130124
 SpriteRenderer:
   m_ObjectHideFlags: 1
