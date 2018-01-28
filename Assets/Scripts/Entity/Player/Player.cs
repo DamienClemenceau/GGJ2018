@@ -70,15 +70,17 @@ public class Player : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
 
         stamina = maxStamina;
-        /*
+        
         miniBlopMarkers = new GameObject[FindObjectsOfType<MiniBlop>().Length];
 
         for (int i = 0; i < miniBlopMarkers.Length; i++)
         {
+            miniBlopMarkers[i] = new GameObject("MiniBlopMarker_" + i);
+            miniBlopMarkers[i].transform.parent = transform;
             miniBlopMarkers[i].transform.position = new Vector3(-2.5f + (-2 * i), -1.25f, 0);
-            Instantiate(miniBlopMarkers[i], transform.position, Quaternion.identity);
+          //  Instantiate(miniBlopMarkers[i], transform.position, Quaternion.identity, transform);
         }
-        */
+        
     }
 
     private void FixedUpdate()
@@ -145,7 +147,7 @@ public class Player : MonoBehaviour
             if(!isStaminaInfinite)
                 stamina -= staminaUseByBlop;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-            _rigidbody.velocity += Vector2.up * (jumpForce * 0.6f);
+            _rigidbody.velocity += Vector2.up * (jumpForce * 0.9f);
         }
 
         if(Time.time - lastTimeStartInfiniteStamina > 10.0f)
