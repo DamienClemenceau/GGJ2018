@@ -4,7 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
-    public void LoadByIndex(int sceneIndex)
+
+	private void Awake()
+	{
+		GameManager.instance.deathCount = 0;
+	}
+
+	public void LoadByIndex(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
     }
