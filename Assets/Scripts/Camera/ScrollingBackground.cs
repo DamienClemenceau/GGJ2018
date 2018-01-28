@@ -21,14 +21,16 @@ public class ScrollingBackground : MonoBehaviour {
 	private float viewZone = 10;
 	private int leftIndex, rightIndex;
 
-	[SerializeField] private bool canSoloMove;
+	[SerializeField] private bool canSoloMove = false;
 
 	/**
 	* Monobehavior methods
 	*/
 	protected void Start () {
 		cameraTransform = Camera.main.transform;
+
 		LastCameraX = cameraTransform.position.x;
+		LastCameraY = cameraTransform.position.y;
 
 		layers = new Transform[transform.childCount];
 		layersSpriteRenderer = new SpriteRenderer[transform.childCount];
@@ -53,28 +55,34 @@ public class ScrollingBackground : MonoBehaviour {
 		deltaX = cameraTransform.position.x - LastCameraX;
 		LastCameraX = cameraTransform.position.x;
 
+		float deltaY = 0;
+		deltaY = cameraTransform.position.y - LastCameraY;
 		LastCameraY = cameraTransform.position.y;
 
-		Vector3 newPos = transform.position;
+		Vector2 newPos = transform.position;
 
 		if (canSoloMove)
 		{
-			newPos = new Vector3(deltaX, transform.position.y, transform.position.z) +  (Vector3.right * Time.time * parallaxSpeedH);
+			newPos = new Vector2(deltaX, transform.position.y) +  (Vector2.right * Time.time * parallaxSpeedH);
 		}
 		else
 		{
-			newPos += Vector3.right * (deltaX * parallaxSpeedH);
+			newPos += Vector2.right * (deltaX * parallaxSpeedH);
 		}
 
-		newPos.y = LastCameraY * parallaxSpeedV;
 
-		transform.position = newPos;
-		LastCameraY = cameraTransform.position.y;
+		newPos += Vector2.up * deltaY * parallaxSpeedV;
+
+		Debug.Log(newPos);
+
+		transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
 
 		if (cameraTransform.position.x < (layers[leftIndex].transform.position.x + viewZone))
 			ScrollLeft();
 		if (cameraTransform.position.x > (layers[rightIndex].transform.position.x - viewZone))
 			ScrollRight();
+
+		LastCameraY = cameraTransform.position.y;
 	}
 
 	/**
