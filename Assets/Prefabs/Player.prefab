@@ -107,21 +107,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1500006980986090
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4318791924994104}
-  m_Layer: 0
-  m_Name: MiniBlopMarker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1628795970378680
 GameObject:
   m_ObjectHideFlags: 1
@@ -181,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 1168845356464744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2025423, y: 1.2025429, z: 1.2025429}
+  m_LocalScale: {x: 1.202542, y: 1.2025429, z: 1.202543}
   m_Children:
   - {fileID: 4553856714375976}
   - {fileID: 4390899756451068}
@@ -190,7 +175,7 @@ Transform:
   - {fileID: 4257414944747350}
   - {fileID: 4619483564026892}
   m_Father: {fileID: 4853547697924976}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4107167762504038
 Transform:
@@ -217,19 +202,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4090388199511594}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4318791924994104
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500006980986090}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3, y: -1.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4853547697924976}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4328580870427338
 Transform:
@@ -294,7 +266,6 @@ Transform:
   m_LocalScale: {x: 0.8315715, y: 0.8315711, z: 0.8315711}
   m_Children:
   - {fileID: 4975902283772742}
-  - {fileID: 4318791924994104}
   - {fileID: 4090388199511594}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -408,9 +379,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  miniBlopMarker: {fileID: 1500006980986090}
   deathObject: {fileID: 1613838021865294, guid: 4f95fb5133c20be45a8bb86fb14f1448,
     type: 2}
+  miniBlopMarkers: []
   stamina: 0
   blopCollected: 0
 --- !u!212 &212175692583206264

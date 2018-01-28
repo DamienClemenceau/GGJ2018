@@ -17,12 +17,14 @@ public class Player : MonoBehaviour
     public float maxStamina;
     public float staminaUseByBlop;
     public LayerMask groundLayer;
-    public GameObject miniBlopMarker, deathObject;
+    public GameObject deathObject;
 
+    [HideInInspector]
+    public GameObject[] miniBlopMarkers;
     [HideInInspector]
     public float stamina = 0;
     [HideInInspector]
-    public float blopCollected;
+    public int blopCollected = 0;
 
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _collider;
@@ -68,6 +70,15 @@ public class Player : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
 
         stamina = maxStamina;
+        /*
+        miniBlopMarkers = new GameObject[FindObjectsOfType<MiniBlop>().Length];
+
+        for (int i = 0; i < miniBlopMarkers.Length; i++)
+        {
+            miniBlopMarkers[i].transform.position = new Vector3(-2.5f + (-2 * i), -1.25f, 0);
+            Instantiate(miniBlopMarkers[i], transform.position, Quaternion.identity);
+        }
+        */
     }
 
     private void FixedUpdate()
