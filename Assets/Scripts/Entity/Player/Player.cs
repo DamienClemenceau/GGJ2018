@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public float stamina;
+    [HideInInspector]
+    public float blopCollected;
 
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _collider;

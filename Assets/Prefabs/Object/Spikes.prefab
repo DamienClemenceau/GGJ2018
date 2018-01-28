@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4157772404385954}
   - component: {fileID: 212776706246198118}
-  - component: {fileID: 61218528740612718}
   - component: {fileID: 114319629581520702}
+  - component: {fileID: 60759757589182324}
   m_Layer: 0
   m_Name: Spikes
   m_TagString: Untagged
@@ -42,8 +42,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -86.523}
---- !u!61 &61218528740612718
-BoxCollider2D:
+--- !u!60 &60759757589182324
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -54,7 +54,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0065107346, y: -0.002170682}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -64,9 +64,18 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.5167961, y: 1.612351}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.7666667, y: 0.82}
+      - {x: 0.6933333, y: 0.82}
+      - {x: -0.7066667, y: 0.10666667}
+      - {x: -0.7633334, y: 0.04}
+      - {x: -0.7633334, y: -0.030000001}
+      - {x: -0.73333335, y: -0.06666667}
+      - {x: 0.67, y: -0.78000003}
+      - {x: 0.74666667, y: -0.78000003}
+      - {x: 0.7966667, y: -0.72}
+      - {x: 0.7966667, y: 0.79}
 --- !u!114 &114319629581520702
 MonoBehaviour:
   m_ObjectHideFlags: 1

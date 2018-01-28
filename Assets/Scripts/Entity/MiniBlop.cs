@@ -37,6 +37,7 @@ public class MiniBlop : MonoBehaviour {
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
+            player.blopCollected++;
             follow = player.miniBlopMarker;
         }
     }
