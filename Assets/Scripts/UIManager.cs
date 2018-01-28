@@ -77,4 +77,14 @@ public class UIManager : MonoBehaviour {
 		SceneManager.LoadScene(0);
 	}
 
+	public void ResumeScene()
+	{
+		isPaused = false;
+	}
+
+	public void RestartScene()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
 }

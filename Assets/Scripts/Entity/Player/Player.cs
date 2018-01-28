@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +16,7 @@ public class Player : MonoBehaviour
     public float staminaUseByBlop;
     public LayerMask groundLayer;
     public GameObject deathObject;
+    public AudioClip audioJump;
 
     [HideInInspector]
     public GameObject[] miniBlopMarkers;
@@ -103,8 +102,10 @@ public class Player : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    void Update()
-    {
+  void Update()
+  {
+		if (!EventSystem.current.IsPointerOverGameObject())
+		{
         if (end)
         {
             EndLevel end = FindObjectOfType<EndLevel>();
@@ -113,69 +114,80 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (Input.GetButton("Interact"))
+        if(Input.GetButton("Interact"))
         {
             Interact();
         }
 
-        if (IsGrounded())
+		if (IsGrounded())
+		{
+			bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
+			if (stamina < maxStamina && canRegenStamina)
+			{
+				lastStaminaIncrement = Time.time;
+				stamina++;
+			}
+
+			isJumping = false;
+			wasGrounded = true;
+			lastGroundedTime = Time.time;
+
+			if (Input.GetButton("Run"))
+			{
+				isRunning = true;
+			}
+			else
+			{
+				isRunning = false;
+			}
+		}
+		else if (Time.time - lastGroundedTime > 0.25f)
+		{
+			wasGrounded = false;
+			isJumping = false;
+		}
+
+		bool canJump = Time.time - lastJumpTime > 0.25f;
+		bool canBlob = Time.time - lastBlopTime > 0.6f;
+
+		if (Input.GetButtonDown("Jump") && wasGrounded && !isJumping && canJump)
+		{
+			isJumping = true;
+			lastJumpTime = Time.time;
+
+			_rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+			_rigidbody.velocity += Vector2.up * jumpForce;
+
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = audioJump;
+            audio.volume = GameManager.instance.audioVolume;
+            audio.Play();
+		}
+		else if (Input.GetButtonDown("Jump") && !wasGrounded && (stamina >= staminaUseByBlop || isStaminaInfinite) && canBlob)
+		{
+			isJumping = true;
+
+			lastBlopTime = Time.time;
+			if (!isStaminaInfinite)
+				stamina -= staminaUseByBlop;
+			_rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+			_rigidbody.velocity += Vector2.up * (jumpForce * 0.75f);
+
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = audioJump;
+            audio.volume = GameManager.instance.audioVolume;
+            audio.Play();
+		}
+
+		if (Time.time - lastTimeStartInfiniteStamina > 10.0f)
+		{
+			isStaminaInfinite = false;
+		}
+	}
+  }
+        private void Interact()
         {
-            bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
-            if (stamina < maxStamina && canRegenStamina)
-            {
-                lastStaminaIncrement = Time.time;
-                stamina++;
-            }
-
-            isJumping = false;
-            wasGrounded = true;
-            lastGroundedTime = Time.time;
-
-            if(Input.GetButton("Run"))
-            {
-                isRunning = true;
-            } else
-            {
-                isRunning = false;
-            }
-        }
-        else if (Time.time - lastGroundedTime > 0.25f)
-        {
-            wasGrounded = false;
-            isJumping = false;
-        }
-
-        bool canJump = Time.time - lastJumpTime > 0.25f;
-        bool canBlob = Time.time - lastBlopTime > 0.6f;
-
-        if (Input.GetButtonDown("Jump") && wasGrounded && !isJumping && canJump)
-        {
-            isJumping = true;
-            lastJumpTime = Time.time;
-
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-            _rigidbody.velocity += Vector2.up * jumpForce;
-        }
-        else if (Input.GetButtonDown("Jump") && !wasGrounded && (stamina >= staminaUseByBlop || isStaminaInfinite) && canBlob)
-        {
-            isJumping = true;
-
-            lastBlopTime = Time.time;
-            if(!isStaminaInfinite)
-                stamina -= staminaUseByBlop;
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-            _rigidbody.velocity += Vector2.up * (jumpForce * 0.75f);
-        }
-
-        if(Time.time - lastTimeStartInfiniteStamina > 10.0f)
-        {
-            isStaminaInfinite = false;
-        }
-    }
-
-    private void Interact()
-    {
-        if(triggerObject != null)
+        if (triggerObject != null)
         {
             JamInteraction jam = triggerObject.GetComponent<JamInteraction>();
             if(jam != null)

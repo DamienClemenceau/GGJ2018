@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class MiniBlop : MonoBehaviour {
     public GameObject follow;
     public string color;
     public float speed;
+    public AudioClip audioCatch;
     
     void Awake () {
         SpriteRenderer[] renderer = GetComponentsInChildren<SpriteRenderer>();
@@ -28,6 +30,11 @@ public class MiniBlop : MonoBehaviour {
         Player player = other.GetComponent<Player>();
         if (player != null && follow == null)
         {
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = audioCatch;
+            audio.volume = GameManager.instance.audioVolume;
+            audio.Play();
+
             follow = player.miniBlopMarkers[player.blopCollected];
             player.blopCollected++;
         }
