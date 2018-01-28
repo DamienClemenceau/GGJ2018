@@ -44,7 +44,6 @@ public class JamInteraction : MonoBehaviour {
     private void Update()
     {
         _animator.SetBool("interact", isIntercated);
-
         if (isIntercated)
         {
 

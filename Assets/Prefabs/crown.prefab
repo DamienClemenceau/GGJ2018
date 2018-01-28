@@ -54,7 +54,11 @@ GameObject:
   - component: {fileID: 212806896021470620}
   - component: {fileID: 58170369246608644}
   - component: {fileID: 114595317724418154}
+<<<<<<< HEAD
+  - component: {fileID: 95981777854239268}
+=======
   - component: {fileID: 82465675658694724}
+>>>>>>> d955e6786c1b533c349dddd58a3049352abbf3c4
   m_Layer: 8
   m_Name: crown
   m_TagString: Untagged
@@ -82,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457803423410778}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.23, y: 0.7, z: 0.030642448}
+  m_LocalPosition: {x: -0.0104003, y: 2.281842, z: 0.03064245}
   m_LocalScale: {x: 2.2813368, y: 2.2813368, z: 2.2813368}
   m_Children:
   - {fileID: 4841090638907020}
@@ -118,13 +122,30 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.5
+<<<<<<< HEAD
+--- !u!95 &95981777854239268
+Animator:
+  serializedVersion: 3
+=======
 --- !u!82 &82465675658694724
 AudioSource:
+>>>>>>> d955e6786c1b533c349dddd58a3049352abbf3c4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457803423410778}
   m_Enabled: 1
+<<<<<<< HEAD
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14b1170363fae8a4fa9bee60cde86287, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+=======
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -198,6 +219,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+>>>>>>> d955e6786c1b533c349dddd58a3049352abbf3c4
 --- !u!114 &114595317724418154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,7 +295,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 617436772
+  randomSeed: 1107497164
   InitialModule:
     serializedVersion: 3
     enabled: 1
