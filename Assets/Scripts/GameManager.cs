@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 	// We define the currentLanguage variable
 	private string currentLangage = "en";
+    [HideInInspector]
     public int deathCount = 0;
     /**
 	* Monobehavior methods
