@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
     private float lastStaminaIncrement;
     private bool isStaminaInfinite;
     private GameObject triggerObject;
+    public bool end;
 
     public float lastTimeStartInfiniteStamina { get; private set; }
 
@@ -85,6 +86,9 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (end)
+            return;
+
         float targetVelocityX = Input.GetAxisRaw("Horizontal") * speed;
 
         if (isRunning)
@@ -101,7 +105,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButton("Interact"))
+        if (end)
+        {
+            EndLevel end = FindObjectOfType<EndLevel>();
+            transform.position = Vector3.Lerp(transform.position, end.marker.transform.position, Time.deltaTime * speed / 2);
+            _rigidbody.isKinematic = true;
+            return;
+        }
+
+        if (Input.GetButton("Interact"))
         {
             Interact();
         }
@@ -214,5 +226,10 @@ public class Player : MonoBehaviour
         {
             triggerObject = null;
         }
+    }
+
+    public bool Completed()
+    {
+        return blopCollected >= miniBlopMarkers.Length;
     }
 }
