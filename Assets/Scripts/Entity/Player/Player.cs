@@ -17,11 +17,15 @@ public class Player : MonoBehaviour
     public float maxStamina;
     public float staminaUseByBlop;
     public LayerMask groundLayer;
+    public GameObject miniBlopMarker, deathObject;
 
     [HideInInspector]
     public float stamina;
+    [HideInInspector]
+    public float blopCollected;
 
     private Rigidbody2D _rigidbody;
+    private BoxCollider2D _collider;
     private SpriteRenderer spriteRenderer;
 
     private Vector2 velocity;
@@ -59,16 +63,17 @@ public class Player : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         stamina = maxStamina;
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         float targetVelocityX = Input.GetAxisRaw("Horizontal") * speed;
 
-        if(isRunning)
+        if (isRunning)
         {
             targetVelocityX *= runSpeed;
         }
@@ -76,9 +81,12 @@ public class Player : MonoBehaviour
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocitySmoothing, 0.01f);
 
         transform.Translate(velocity * Time.deltaTime);
+    }
 
+    void Update()
+    {
         Flip();
-
+        print(IsGrounded());
         if (IsGrounded())
         {
             bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
@@ -115,7 +123,7 @@ public class Player : MonoBehaviour
             lastJumpTime = Time.time;
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-            _rigidbody.AddForce(Vector2.up * jumpForce);
+            _rigidbody.velocity += Vector2.up * jumpForce;
         }
         else if (Input.GetButtonDown("Jump") && !wasGrounded && (stamina >= staminaUseByBlop || isStaminaInfinite) && canBlob)
         {
@@ -123,7 +131,7 @@ public class Player : MonoBehaviour
             if(!isStaminaInfinite)
                 stamina -= staminaUseByBlop;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-            _rigidbody.AddForce(Vector2.up * jumpForce / 2);
+            _rigidbody.velocity += Vector2.up * (jumpForce * 0.6f);
         }
 
         if(Time.time - lastTimeStartInfiniteStamina > 10.0f)
@@ -134,7 +142,15 @@ public class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector3.down, 0.15f, groundLayer);
+        Bounds bounds = _collider.bounds;
+
+        Vector2 bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
+        Vector2 bottomRight = new Vector2(bounds.max.x, bounds.min.y);
+
+        bool groundedLeft = Physics2D.Raycast(bottomLeft, Vector3.down, 0.15f, groundLayer);
+        bool groundedRight = Physics2D.Raycast(bottomRight, Vector3.down, 0.15f, groundLayer);
+        
+        return groundedLeft || groundedRight;
     }
 
     private void Flip()
@@ -150,5 +166,11 @@ public class Player : MonoBehaviour
     {
         isStaminaInfinite = true;
         lastTimeStartInfiniteStamina = Time.time;
+    }
+
+    public void Death()
+    {
+        Instantiate(deathObject, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

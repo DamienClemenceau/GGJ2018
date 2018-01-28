@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour {
 
 	// We define the currentLanguage variable
 	private string currentLangage = "en";
-
 	/**
 	* Monobehavior methods
 	*/

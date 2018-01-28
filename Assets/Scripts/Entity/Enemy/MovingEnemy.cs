@@ -49,7 +49,7 @@ public class MovingEnemy : KillingObject {
 
         return pos - transform.position;
     }
-
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (localWaypoints != null)
@@ -65,4 +65,5 @@ public class MovingEnemy : KillingObject {
             }
         }
     }
+#endif
 }

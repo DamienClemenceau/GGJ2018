@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4157772404385954}
   - component: {fileID: 212776706246198118}
-  - component: {fileID: 61218528740612718}
   - component: {fileID: 114319629581520702}
+  - component: {fileID: 60759757589182324}
   m_Layer: 0
   m_Name: Spikes
   m_TagString: Untagged
@@ -35,15 +35,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1984878178637410}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.6853288, w: 0.7282339}
+  m_LocalPosition: {x: -2.73, y: -0.9599999, z: 0.012298516}
+  m_LocalScale: {x: 0.9250708, y: 0.9250706, z: 0.92507017}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61218528740612718
-BoxCollider2D:
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -86.523}
+--- !u!60 &60759757589182324
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -51,22 +51,31 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1.7066667, y: 1.7066667}
+    newSize: {x: 1.7066667, y: 1.7066667}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.7666667, y: 0.82}
+      - {x: 0.6933333, y: 0.82}
+      - {x: -0.7066667, y: 0.10666667}
+      - {x: -0.7633334, y: 0.04}
+      - {x: -0.7633334, y: -0.030000001}
+      - {x: -0.73333335, y: -0.06666667}
+      - {x: 0.67, y: -0.78000003}
+      - {x: 0.74666667, y: -0.78000003}
+      - {x: 0.7966667, y: -0.72}
+      - {x: 0.7966667, y: 0.79}
 --- !u!114 &114319629581520702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,12 +121,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7510323f0ca7e42478718158f8c5a04d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8531056459378864daf03eee374aacc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1.7066667, y: 1.7066667}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
