@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -17,9 +18,12 @@ public class GameManager : MonoBehaviour {
 	private string currentLangage = "en";
     [HideInInspector]
     public int deathCount = 0;
+
+    public bool isPaused;
+
     /**
-	* Monobehavior methods
-	*/
+* Monobehavior methods
+*/
     // Use this for initialization
     void Awake()
 	{

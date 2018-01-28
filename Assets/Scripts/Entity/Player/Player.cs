@@ -176,7 +176,8 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
-     //   GameManager.instance.deathCount++;
+        if(GameManager.instance != null)
+            GameManager.instance.deathCount++;
         Instantiate(deathObject, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
