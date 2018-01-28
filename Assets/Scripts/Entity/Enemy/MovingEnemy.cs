@@ -5,12 +5,19 @@ public class MovingEnemy : KillingObject {
     public Vector3[] localWaypoints;
     public float speed;
     public bool loop;
+    public string color;
 
     private Vector3[] globalWaypoints;
     private int fromWaypointIndex;
     private float percentBetween;
 
-	void Start () {
+    void Awake()
+    {
+        SpriteRenderer renderer = GetComponentInChildren<SpriteRenderer>();
+        renderer.sprite = Resources.Load("Sprites/starfish_" + color) as Sprite;
+    }
+
+    void Start () {
         globalWaypoints = new Vector3[localWaypoints.Length];
         for(int i = 0; i < localWaypoints.Length; i++)
         {
