@@ -66,4 +66,10 @@ public class GameManager : MonoBehaviour {
 		// Loading next scene
 		//SceneManager.LoadScene(1, LoadSceneMode.Single);
 	}
+
+    private void Update()
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.volume = GameManager.instance.audioVolume;
+    }
 }

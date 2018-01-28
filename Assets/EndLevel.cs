@@ -9,6 +9,7 @@ public class EndLevel : MonoBehaviour {
     private bool ended;
     public GameObject marker;
     public ParticleSystem particle;
+    public AudioClip audioCatch;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,6 +21,12 @@ public class EndLevel : MonoBehaviour {
             if(ended)
             {
                 GameManager.instance.updateTimer = false;
+
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.clip = audioCatch;
+                audio.volume = GameManager.instance.audioVolume;
+                audio.Play();
+
                 particle.Play();
             }
         }

@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public float staminaUseByBlop;
     public LayerMask groundLayer;
     public GameObject deathObject;
+    public AudioClip audioJump;
 
     [HideInInspector]
     public GameObject[] miniBlopMarkers;
@@ -155,6 +156,11 @@ public class Player : MonoBehaviour
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
             _rigidbody.velocity += Vector2.up * jumpForce;
+
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = audioJump;
+            audio.volume = GameManager.instance.audioVolume;
+            audio.Play();
         }
         else if (Input.GetButtonDown("Jump") && !wasGrounded && (stamina >= staminaUseByBlop || isStaminaInfinite) && canBlob)
         {
@@ -165,6 +171,11 @@ public class Player : MonoBehaviour
                 stamina -= staminaUseByBlop;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
             _rigidbody.velocity += Vector2.up * (jumpForce * 0.75f);
+
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = audioJump;
+            audio.volume = GameManager.instance.audioVolume;
+            audio.Play();
         }
 
         if(Time.time - lastTimeStartInfiniteStamina > 10.0f)
