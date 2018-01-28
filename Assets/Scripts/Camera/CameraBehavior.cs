@@ -12,10 +12,6 @@ public class CameraBehavior : MonoBehaviour {
 	[SerializeField] Transform MoveAxis;
 	[SerializeField] Transform ShakeAxis;
 
-	[SerializeField] Transform landscape;
-	private Transform _background;
-	private Transform _backgroundFiltre;
-
 	// For shaking camera
 	private bool _isShaking = false;
 	private int _shakeCount;
@@ -35,9 +31,6 @@ public class CameraBehavior : MonoBehaviour {
 	private void Start() {
 		player = Player.instance;
 
-		/*_background = landscape.GetChild(0).transform;
-		_backgroundFiltre = landscape.GetChild(1).transform;*/
-		
 		// Set up base positions, these are used for shaking to determine where to return to after a shake.
 		_baseX = ShakeAxis.localPosition.x;
 		_baseY = ShakeAxis.localPosition.y;
@@ -47,15 +40,7 @@ public class CameraBehavior : MonoBehaviour {
         if (player == null)
             return;
 
-		Vector3 pos = MoveAxis.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, MoveAxis.transform.position.z);
-
-		if (MoveAxis.transform.position.y < .01f)
-			pos.y = 0;
-
-		MoveAxis.transform.position = pos;
-
-		/*_background.position = new Vector3(MoveAxis.transform.position.x, _background.position.y, _background.position.z);
-		_backgroundFiltre.position = new Vector3(MoveAxis.transform.position.x, _backgroundFiltre.position.y, _backgroundFiltre.position.z);*/
+		MoveAxis.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, MoveAxis.transform.position.z);
 
 		if (_isShaking) {
 			// Move toward the previously determined next shake position

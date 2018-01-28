@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public GameObject miniBlopMarker, deathObject;
 
     [HideInInspector]
-    public float stamina;
+    public float stamina = 0;
     [HideInInspector]
     public float blopCollected;
 
@@ -86,7 +86,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         Flip();
-        print(IsGrounded());
         if (IsGrounded())
         {
             bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
@@ -170,6 +169,7 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+     //   GameManager.instance.deathCount++;
         Instantiate(deathObject, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

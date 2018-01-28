@@ -7,10 +7,12 @@ public class ScrollingBackground : MonoBehaviour {
 	/**
 	* Attributes
 	*/
-	[SerializeField] private float parallaxSpeed;
+	[SerializeField] private float parallaxSpeedH;
+	[SerializeField] private float parallaxSpeedV;
 
 	private Transform cameraTransform;
 	private float LastCameraX;
+	private float LastCameraY;
 
 	private Transform[] layers;
 	private SpriteRenderer[] layersSpriteRenderer;
@@ -51,14 +53,23 @@ public class ScrollingBackground : MonoBehaviour {
 		deltaX = cameraTransform.position.x - LastCameraX;
 		LastCameraX = cameraTransform.position.x;
 
+		LastCameraY = cameraTransform.position.y;
+
+		Vector3 newPos = transform.position;
+
 		if (canSoloMove)
 		{
-			transform.position = new Vector3(deltaX, transform.position.y, transform.position.z) +  Vector3.right * Time.time * parallaxSpeed;
+			newPos = new Vector3(deltaX, transform.position.y, transform.position.z) +  (Vector3.right * Time.time * parallaxSpeedH);
 		}
 		else
 		{
-			transform.position += Vector3.right * (deltaX * parallaxSpeed);
+			newPos += Vector3.right * (deltaX * parallaxSpeedH);
 		}
+
+		newPos.y = LastCameraY * parallaxSpeedV;
+
+		transform.position = newPos;
+		LastCameraY = cameraTransform.position.y;
 
 		if (cameraTransform.position.x < (layers[leftIndex].transform.position.x + viewZone))
 			ScrollLeft();
