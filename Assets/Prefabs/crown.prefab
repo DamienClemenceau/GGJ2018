@@ -131,6 +131,7 @@ MonoBehaviour:
   nextSceneName: Victory
   marker: {fileID: 1376252753531246}
   particle: {fileID: 198394675744065750}
+  audioCatch: {fileID: 8300000, guid: 861f37be3e292704681e60590d0d2986, type: 3}
 --- !u!198 &198394675744065750
 ParticleSystem:
   m_ObjectHideFlags: 1
