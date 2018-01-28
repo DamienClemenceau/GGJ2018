@@ -59667,30 +59667,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 1762680181078734, guid: db8cab3bb0443e541972b46505a98018, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4211568942929460, guid: db8cab3bb0443e541972b46505a98018, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.6340799
-      objectReference: {fileID: 0}
-    - target: {fileID: 4211568942929460, guid: db8cab3bb0443e541972b46505a98018, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7732676
-      objectReference: {fileID: 0}
-    - target: {fileID: 4211568942929460, guid: db8cab3bb0443e541972b46505a98018, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -9.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4211568942929460, guid: db8cab3bb0443e541972b46505a98018, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -3.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 4211568942929460, guid: db8cab3bb0443e541972b46505a98018, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 78.704
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db8cab3bb0443e541972b46505a98018, type: 2}
   m_IsPrefabParent: 0
@@ -68251,7 +68227,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1084878682}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &1407576269
@@ -68265,7 +68241,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1413944011
 Prefab:
