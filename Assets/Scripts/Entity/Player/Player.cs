@@ -17,16 +17,19 @@ public class Player : MonoBehaviour
     public float maxStamina;
     public float staminaUseByBlop;
     public LayerMask groundLayer;
-    public GameObject miniBlopMarker, deathObject;
+    public GameObject deathObject;
 
     [HideInInspector]
-    public float stamina;
+    public GameObject[] miniBlopMarkers;
     [HideInInspector]
-    public float blopCollected;
+    public float stamina = 0;
+    [HideInInspector]
+    public int blopCollected = 0;
 
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _collider;
     private SpriteRenderer spriteRenderer;
+    private Animator _animator;
 
     private Vector2 velocity;
     private Vector2 directionnalInput;
@@ -64,9 +67,19 @@ public class Player : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponentInChildren<Animator>();
 
         stamina = maxStamina;
+        
+        miniBlopMarkers = new GameObject[FindObjectsOfType<MiniBlop>().Length];
+
+        for (int i = 0; i < miniBlopMarkers.Length; i++)
+        {
+            miniBlopMarkers[i] = new GameObject("MiniBlopMarker_" + i);
+            miniBlopMarkers[i].transform.parent = transform;
+            miniBlopMarkers[i].transform.localPosition = new Vector3(-2.5f + (-2 * i), -1.25f, 0);
+        }
+        
     }
 
     private void FixedUpdate()
@@ -78,6 +91,8 @@ public class Player : MonoBehaviour
             targetVelocityX *= runSpeed;
         }
 
+        _animator.SetBool("isJumping", isJumping);
+
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocitySmoothing, 0.01f);
 
         transform.Translate(velocity * Time.deltaTime);
@@ -85,8 +100,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Flip();
-        print(IsGrounded());
         if (IsGrounded())
         {
             bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
@@ -127,11 +140,13 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetButtonDown("Jump") && !wasGrounded && (stamina >= staminaUseByBlop || isStaminaInfinite) && canBlob)
         {
+            isJumping = true;
+
             lastBlopTime = Time.time;
             if(!isStaminaInfinite)
                 stamina -= staminaUseByBlop;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-            _rigidbody.velocity += Vector2.up * (jumpForce * 0.6f);
+            _rigidbody.velocity += Vector2.up * (jumpForce * 0.75f);
         }
 
         if(Time.time - lastTimeStartInfiniteStamina > 10.0f)
@@ -153,15 +168,6 @@ public class Player : MonoBehaviour
         return groundedLeft || groundedRight;
     }
 
-    private void Flip()
-    {
-        if ((facingRight && velocity.x > 0) || (!facingRight && velocity.x < 0))
-        {
-            spriteRenderer.flipX = !spriteRenderer.flipX;
-            facingRight = !facingRight;
-        }
-    }
-
     public void TemporaryInfiniteStamina()
     {
         isStaminaInfinite = true;
@@ -170,6 +176,8 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+        if(GameManager.instance != null)
+            GameManager.instance.deathCount++;
         Instantiate(deathObject, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

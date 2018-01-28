@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -15,11 +16,16 @@ public class GameManager : MonoBehaviour {
 
 	// We define the currentLanguage variable
 	private string currentLangage = "en";
-	/**
-	* Monobehavior methods
-	*/
-	// Use this for initialization
-	void Awake()
+    [HideInInspector]
+    public int deathCount = 0;
+
+    public bool isPaused;
+
+    /**
+* Monobehavior methods
+*/
+    // Use this for initialization
+    void Awake()
 	{
 
 		// Check if there is another gamemanager if it is, I self-destruct

@@ -5,40 +5,31 @@ using UnityEngine;
 public class MiniBlop : MonoBehaviour {
     public GameObject follow;
     public string color;
-
-	void Awake () {
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        switch(color)
+    public float speed;
+    
+    void Awake () {
+        SpriteRenderer[] renderer = GetComponentsInChildren<SpriteRenderer>();
+        Object[] sprites = Resources.LoadAll("Sprites/mini" + color +  "_spritesheet"); 
+        for (int i = 0; i < renderer.Length; i++)
         {
-            case "Yellow":
-                renderer.sprite = Resources.Load("Sprites/mini_blop_jaune", typeof(Sprite)) as Sprite;
-                break;
-            case "Green":
-                renderer.sprite = Resources.Load("Sprites/mini_blop_vert", typeof(Sprite)) as Sprite;
-                break;
-            case "Purple":
-                renderer.sprite = Resources.Load("Sprites/mini_blop_violet", typeof(Sprite)) as Sprite;
-                break;
-            default:
-                renderer.sprite = Resources.Load("Sprites/mini_blop_bleu", typeof(Sprite)) as Sprite;
-                break;
+            renderer[i].sprite = (Sprite)sprites[i + 1];
         }
-	}
+    }
 	
 	void Update () {
 	    if(follow != null)
         {
-            transform.position = Vector3.Lerp(transform.position, follow.transform.position, Time.deltaTime * 2);
+            transform.position = Vector3.Lerp(transform.position, follow.transform.position, Time.deltaTime * speed);
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         Player player = other.GetComponent<Player>();
-        if (player != null)
+        if (player != null && follow == null)
         {
+            follow = player.miniBlopMarkers[player.blopCollected];
             player.blopCollected++;
-            follow = player.miniBlopMarker;
         }
     }
 }
