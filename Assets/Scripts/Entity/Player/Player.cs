@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _collider;
     private SpriteRenderer spriteRenderer;
+    private Animator _animator;
 
     private Vector2 velocity;
     private Vector2 directionnalInput;
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponentInChildren<Animator>();
 
         stamina = maxStamina;
     }
@@ -78,6 +79,8 @@ public class Player : MonoBehaviour
             targetVelocityX *= runSpeed;
         }
 
+        _animator.SetBool("isJumping", isJumping);
+
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocitySmoothing, 0.01f);
 
         transform.Translate(velocity * Time.deltaTime);
@@ -85,7 +88,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Flip();
         if (IsGrounded())
         {
             bool canRegenStamina = Time.time - lastStaminaIncrement > 0.25f;
@@ -126,6 +128,8 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetButtonDown("Jump") && !wasGrounded && (stamina >= staminaUseByBlop || isStaminaInfinite) && canBlob)
         {
+            isJumping = true;
+
             lastBlopTime = Time.time;
             if(!isStaminaInfinite)
                 stamina -= staminaUseByBlop;
@@ -150,15 +154,6 @@ public class Player : MonoBehaviour
         bool groundedRight = Physics2D.Raycast(bottomRight, Vector3.down, 0.15f, groundLayer);
         
         return groundedLeft || groundedRight;
-    }
-
-    private void Flip()
-    {
-        if ((facingRight && velocity.x > 0) || (!facingRight && velocity.x < 0))
-        {
-            spriteRenderer.flipX = !spriteRenderer.flipX;
-            facingRight = !facingRight;
-        }
     }
 
     public void TemporaryInfiniteStamina()
