@@ -388,7 +388,7 @@ MonoBehaviour:
   follow: {fileID: 0}
   color: vert
   speed: 2
-  audioCatch: {fileID: 8300000, guid: 4a0d34de2be680846b2b267629586127, type: 3}
+  audioCatch: {fileID: 8300000, guid: 5b8376641b4e63a41832c025aebc6974, type: 3}
 --- !u!212 &212012751939313048
 SpriteRenderer:
   m_ObjectHideFlags: 1

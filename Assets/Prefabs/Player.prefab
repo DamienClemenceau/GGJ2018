@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 114939956328757076}
   - component: {fileID: 50212561739351992}
   - component: {fileID: 58678962142050756}
+  - component: {fileID: 82952396479878878}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -343,6 +344,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2609892, y: 0.8}
   m_EdgeRadius: 0
+--- !u!82 &82952396479878878
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1816274093758926}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95824561051338204
 Animator:
   serializedVersion: 3
@@ -381,9 +462,11 @@ MonoBehaviour:
     m_Bits: 256
   deathObject: {fileID: 1613838021865294, guid: 4f95fb5133c20be45a8bb86fb14f1448,
     type: 2}
+  audioJump: {fileID: 8300000, guid: 2282dd482bbed824fa9dc346960561f4, type: 3}
   miniBlopMarkers: []
   stamina: 0
   blopCollected: 0
+  end: 0
 --- !u!212 &212175692583206264
 SpriteRenderer:
   m_ObjectHideFlags: 1

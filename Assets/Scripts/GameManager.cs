@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour {
 	public LogsManager logsManager;
 	[HideInInspector]
 	public AudioSource audioSource;
-    [HideInInspector]
-    public float audioVolume;
+
+    public float audioVolume = 1.0f;
     [HideInInspector]
     public int deathCount = 0;
     [HideInInspector]
@@ -70,6 +70,6 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         AudioSource audio = GetComponent<AudioSource>();
-        audio.volume = GameManager.instance.audioVolume;
+        audio.volume = audioVolume;
     }
 }
