@@ -12,16 +12,17 @@ public class UIManager : MonoBehaviour {
     void Start () {
         curStamina.text = player.stamina.ToString();
         maxStamina.text = player.maxStamina.ToString();
-
-        deathCounter.text = "0";
-
+        
         curCollect.text = player.blopCollected.ToString();
-        maxCollect.text = GameObject.FindObjectsOfType<MiniBlop>().Length.ToString();
+        maxCollect.text = FindObjectsOfType<MiniBlop>().Length.ToString();
+
+      //  deathCounter.text = GameManager.instance.deathCount.ToString();
     }
 
     private void LateUpdate()
     {
         curStamina.text = player.stamina.ToString();
         curCollect.text = player.blopCollected.ToString();
+       // deathCounter.text = GameManager.instance.deathCount.ToString();
     }
 }

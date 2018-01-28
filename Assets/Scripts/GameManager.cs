@@ -15,11 +15,12 @@ public class GameManager : MonoBehaviour {
 
 	// We define the currentLanguage variable
 	private string currentLangage = "en";
-	/**
+    public int deathCount = 0;
+    /**
 	* Monobehavior methods
 	*/
-	// Use this for initialization
-	void Awake()
+    // Use this for initialization
+    void Awake()
 	{
 
 		// Check if there is another gamemanager if it is, I self-destruct
