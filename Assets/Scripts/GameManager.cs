@@ -13,12 +13,18 @@ public class GameManager : MonoBehaviour {
 	public LogsManager logsManager;
 	[HideInInspector]
 	public AudioSource audioSource;
-
-	// We define the currentLanguage variable
-	private string currentLangage = "en";
+    [HideInInspector]
+    public float audioVolume;
     [HideInInspector]
     public int deathCount = 0;
+    [HideInInspector]
+    public float timer = 0;
+    [HideInInspector]
+    public bool updateTimer = true;
 
+    // We define the currentLanguage variable
+    private string currentLangage = "en";
+    
     public bool isPaused;
 
     /**

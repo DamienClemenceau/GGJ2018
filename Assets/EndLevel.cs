@@ -19,6 +19,7 @@ public class EndLevel : MonoBehaviour {
 
             if(ended)
             {
+                GameManager.instance.updateTimer = false;
                 particle.Play();
             }
         }
@@ -31,6 +32,11 @@ public class EndLevel : MonoBehaviour {
 
     private void Update()
     {
+        if(GameManager.instance.updateTimer)
+        {
+            GameManager.instance.timer += Time.time;
+        }
+
         if (Time.time - startEnding > 3f && ended) { 
             SceneManager.LoadScene(nextSceneName);
         }
